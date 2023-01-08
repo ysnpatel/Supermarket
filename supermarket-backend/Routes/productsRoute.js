@@ -18,5 +18,10 @@ router.put('/updateProductById',(req,res)=>{
     productsController.updateProductById(req,res)
 })
 
+router.get('/getallproducts',(req,res)=>{
+    productsController.getAllProducts(req,res)
+})
+
+
 
 module.exports = router;

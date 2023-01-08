@@ -7,4 +7,10 @@ const getOneProductById = async (req,res)=>{
     res.send(data)
 }
 
-module.exports = { getOneProductById }
+const getAllProducts = async (req,res)=>{
+
+    let data = await DBServices.dbGetAllProducts(req,res)
+    res.send(data)
+}
+
+module.exports = { getOneProductById, getAllProducts }

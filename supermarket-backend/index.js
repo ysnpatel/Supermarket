@@ -1,8 +1,12 @@
 let express = require("express")
 let cors = require("cors") 
 let application = express()
+const bodyParser = require('body-parser')
+
 application.use(cors())
-application.use(express.json());
+application.use(bodyParser.json())
+application.use(bodyParser.urlencoded({ extended: true })) //puts form data into req.body
+
 
 ///////// add mySQL into project
 const mysql = require('mysql2');
