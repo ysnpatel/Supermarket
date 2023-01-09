@@ -29,7 +29,7 @@ function Copyright() {
   );
 }
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Shipping address', 'Payment details'];
 
 function getStepContent(step) {
   switch (step) {
@@ -37,8 +37,6 @@ function getStepContent(step) {
       return <AddressForm />;
     case 1:
       return <PaymentForm />;
-    case 2:
-      return <Review />;
     default:
       throw new Error('Unknown step');
   }
@@ -51,6 +49,11 @@ export default function Checkout() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+    // if (activeStep === 1){
+    //   axios.post(url, cart)
+    //   .then(setActiveStep to activestep+1, arrow function)
+    //   .catch(alert error)
+    // }
   };
 
   const handleBack = () => {

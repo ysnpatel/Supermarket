@@ -14,6 +14,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import { PriceChange } from '@mui/icons-material';
 
 
 
@@ -21,11 +22,10 @@ export default function Cart() {
   const [card, setCard] = useState([]);
   const [listOfItems, setListOfItems ] = useState([])
   const { authenticated, currentUserInfo, cart, setCart, isDrawerOpen, setIsDrawerOpen } = useContext(CustomContext);
-
+  const [total, setTotal] = useState(0)
 
   useEffect(() => {
    
-
       fetchAllCartItems()
   }, [cart]);
   async function fetchAllCartItems(){
@@ -38,7 +38,6 @@ export default function Cart() {
       axios
       .get(`http://localhost:8080/products/getOneProduct/${keys[i]}`)
       .then((res) => {
-        console.log(res.data)
         setListOfItems(previousArray =>[...previousArray, res.data[0]]);
   
       })
@@ -48,14 +47,25 @@ export default function Cart() {
 
     }
   }
+
+  useEffect(() => {
+    const values = Object.values(cart)
+    if (values.length == listOfItems.length) {
+      let total = 0
+for (let i = 0; i < values.length; i++){
+  console.log(values[i])
+  const price = (values[i]*listOfItems[i].price)
+  console.log(price)
+  total += parseFloat(price)
+  console.log(total)
+}
+setTotal(total.toFixed(2))
+    }
+  }, [cart, listOfItems])
+
   
 
-//   console.log(cart)
 
-// [{productID: 101},{productID: 102},{productID: 103}]
-
-
-// {101:3, 102:4}
 
 
 
@@ -80,10 +90,11 @@ export default function Cart() {
                   flexDirection: "column",
                 }}
               >
-                <CardContent>{item.productName}{cart[item.productId]}</CardContent>
+                <CardContent>{item.productName}<br></br>{cart[item.productId]}<br></br>{(item.price*cart[item.productId]).toFixed(2)}</CardContent>
               </Card>
           ))}
         </Grid>
+        <Typography>{total}</Typography>
       </Container>
         
         <NavLink to="checkout">

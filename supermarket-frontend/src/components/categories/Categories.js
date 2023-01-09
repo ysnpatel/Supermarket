@@ -19,8 +19,9 @@ import axios from "axios";
 import { json } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { CustomContext } from "../../context/Context.js";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Category } from "@mui/icons-material";
+import { ButtonGroup } from "@mui/material";
 
 function Copyright() {
   return (
@@ -40,10 +41,9 @@ const theme = createTheme();
 export default function Album() {
   const [card, setCard] = useState([]);
   //let [filter, setFilter] = useState(card);
-  const { cart, setCart, filter, setFilter} = useContext(CustomContext);
+  const { cart, setCart, filter, setFilter } = useContext(CustomContext);
 
-
-  const {category} = useParams()
+  const { category } = useParams();
 
   useEffect(() => {
     axios
@@ -64,150 +64,143 @@ export default function Album() {
   };
 
   useEffect(() => {
-    filterProduct(category)
+    filterProduct(category);
   }, [card]);
 
   const ShowProducts = () => {
     return (
       <>
         <div>
-          <Button
-            size="small"
-            onClick={() => {
-              setFilter(card);
-            }}
-          >
-            All Products
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Bakery");
-            }}
-          >
-            Bakery
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Cooking");
-            }}
-          >
-            Cooking
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Dairy");
-            }}
-          >
-            Dairy
-          </Button>{" "}
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Frozen");
-            }}
-          >
-            Frozen
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Fruit & Vege");
-            }}
-          >
-            Fruit & Vege
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Household");
-            }}
-          >
-            Household
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Meat");
-            }}
-          >
-            Meat
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Snacks");
-            }}
-          >
-            Snacks
-          </Button>
-          <Button
-            size="small"
-            onClick={() => {
-              filterProduct("Pantry");
-            }}
-          >
-            Pantry
-          </Button>
+          <ButtonGroup  sx={{display:"flex", justifyContent: "center"}} aria-label="outlined button group" size="large">
+            <Button
+              onClick={() => {
+                filterProduct("Bakery");
+              }}
+            >
+              Bakery
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Cooking");
+              }}
+            >
+              Cooking
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Dairy");
+              }}
+            >
+              Dairy
+            </Button>{" "}
+            <Button
+              onClick={() => {
+                filterProduct("Frozen");
+              }}
+            >
+              Frozen
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Fruit & Vege");
+              }}
+            >
+              Fruit & Vege
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Household");
+              }}
+            >
+              Household
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Meat");
+              }}
+            >
+              Meat
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Snacks");
+              }}
+            >
+              Snacks
+            </Button>
+            <Button
+              onClick={() => {
+                filterProduct("Pantry");
+              }}
+            >
+              Pantry
+            </Button>
+          </ButtonGroup>
         </div>
         <Container sx={{ py: 8 }} maxWidth="md">
-        <Grid container spacing={4}>
-            {filter.length === 0 ? <h1> Loading filter state </h1> : filter.map((item, index) => { 
-              return (
-              
-              <Grid item key={index} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    // sx={{
-                    //   // 16:9
-                    //   pt: '56.25%',
-                    // }}
-                    image={item.Image}
-                    alt="random"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {item.productName}
-                    </Typography>
-                    <Typography>{item.price}</Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button
-                      size="small"
-                      onClick={() => subtractProduct(item.productId)}
+          <Grid container spacing={4}>
+            {filter.length === 0 ? (
+              <h1> Loading... </h1>
+            ) : (
+              filter.map((item, index) => {
+                return (
+                  <Grid item key={index} xs={12} sm={6} md={4}>
+                    <Card
+                      sx={{
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
                     >
-                      -
-                    </Button>
-                    <TextField
+                      <CardMedia
+                        component="img"
+                        // sx={{
+                        //   // 16:9
+                        //   pt: '56.25%',
+                        // }}
+                        image={item.Image}
+                        alt="random"
+                      />
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {item.productName}
+                        </Typography>
+                        <Typography>{item.price}</Typography>
+                      </CardContent>
+                      <CardActions
+                        sx={{ display: "flex", justifyContent: "space-around" }}
+                      >
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => subtractProduct(item.productId)}
+                        >
+                          -
+                        </Button>
+                        {/* <TextField
                       id="outlined-size-small"
                       inputProps={{ min: 0, style: { textAlign: "center" } }}
                       defaultValue="0"
                       size="small"
-                      // value={cart[{item.productId}]}
-                    />
+                      value={cart[item.productId]}
+                    /> */}
+                        <h1>{cart[item.productId] || 0}</h1>
 
-                    <Button
-                      size="small"
-                      onClick={() => addProduct(item.productId)}
-                    >
-                      +
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            )})}
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => addProduct(item.productId)}
+                        >
+                          +
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              })
+            )}
           </Grid>
-          </Container>
-       
+        </Container>
       </>
     );
   };
@@ -259,14 +252,7 @@ export default function Album() {
             >
               Groceries
             </Typography>
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              {JSON.stringify(cart)}
-            </Typography>
+
             {/* <Stack
               sx={{ pt: 4 }}
               direction="row"
@@ -275,10 +261,9 @@ export default function Album() {
             >
             
             </Stack> */}
-            
           </Container>
         </Box>
-        <ShowProducts/>
+        <ShowProducts />
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
