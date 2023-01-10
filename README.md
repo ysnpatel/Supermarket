@@ -1,6 +1,6 @@
 # Supo
 
-## Supo is a web application frontend and backend that a new grocery business could utilize, the frontend connects to the backend and consumes the api it offers.
+# Supo is a web application frontend and backend that a new grocery business could utilize, the frontend connects to the backend and consumes the api it offers.
 
  ### Some features are:  
                     
