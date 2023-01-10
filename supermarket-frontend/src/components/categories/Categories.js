@@ -1,5 +1,4 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,20 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { json } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import { CustomContext } from "../../context/Context.js";
 import { useParams } from "react-router-dom";
-import { Category } from "@mui/icons-material";
 import { ButtonGroup } from "@mui/material";
 
 function Copyright() {
@@ -40,11 +34,11 @@ const theme = createTheme();
 
 export default function Album() {
   const [card, setCard] = useState([]);
-  //let [filter, setFilter] = useState(card);
   const { cart, setCart, filter, setFilter } = useContext(CustomContext);
 
-  const { category } = useParams();
+  const { category } = useParams(); //necessary to use categories as path parameters, explained in Home component
 
+  //GET all products
   useEffect(() => {
     axios
       .get("http://localhost:8080/products/getallproducts")
@@ -57,6 +51,7 @@ export default function Album() {
       });
   }, []);
 
+  //Filter products by category
   const filterProduct = (cat) => {
     const updatedList = card.filter((x) => x.mainCategory === cat);
     console.log(filterProduct);
@@ -67,6 +62,7 @@ export default function Album() {
     filterProduct(category);
   }, [card]);
 
+  // Show products and button group
   const ShowProducts = () => {
     return (
       <>
@@ -140,7 +136,7 @@ export default function Album() {
         <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
             {filter.length === 0 ? (
-              <h1> Loading... </h1>
+              <h1> Loading... </h1> //note only 3 categories currently populated with images. The rest will display this for now.
             ) : (
               filter.map((item, index) => {
                 return (
@@ -154,10 +150,6 @@ export default function Album() {
                     >
                       <CardMedia
                         component="img"
-                        // sx={{
-                        //   // 16:9
-                        //   pt: '56.25%',
-                        // }}
                         image={item.Image}
                         alt="random"
                       />
@@ -177,15 +169,7 @@ export default function Album() {
                         >
                           -
                         </Button>
-                        {/* <TextField
-                      id="outlined-size-small"
-                      inputProps={{ min: 0, style: { textAlign: "center" } }}
-                      defaultValue="0"
-                      size="small"
-                      value={cart[item.productId]}
-                    /> */}
                         <h1>{cart[item.productId] || 0}</h1>
-
                         <Button
                           size="small"
                           variant="outlined"
@@ -205,6 +189,7 @@ export default function Album() {
     );
   };
 
+  //add product to cart
   const addProduct = (itemId) => {
     let currentQuantity = cart[itemId]; 
     if (currentQuantity === undefined) {
@@ -214,9 +199,9 @@ export default function Album() {
     }
     const newItem = { [itemId]: currentQuantity };
     setCart((cart) => ({ ...cart, ...newItem }));
-    // console.log(cart[itemId])
   };
 
+  //subtract product from cart
   const subtractProduct = (itemId) => {
     let currentQuantity = cart[itemId];
     if (currentQuantity === undefined) {
@@ -234,7 +219,6 @@ export default function Album() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: "background.paper",
@@ -252,20 +236,10 @@ export default function Album() {
             >
               Groceries
             </Typography>
-
-            {/* <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-            
-            </Stack> */}
           </Container>
         </Box>
         <ShowProducts />
       </main>
-      {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
 
         <Typography
@@ -278,7 +252,6 @@ export default function Album() {
         </Typography>
         <Copyright />
       </Box>
-      {/* End footer */}
     </ThemeProvider>
   );
 }

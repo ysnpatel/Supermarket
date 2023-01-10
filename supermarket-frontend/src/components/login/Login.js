@@ -65,22 +65,6 @@ export default function SignInSide() {
     })
   };
 
-  // function fetchSignIn(){
-  //   axios.post('http://localhost:8080/users/getoneproduct/100')
-    // .then(res => {
-    //   setCard(res.data)
-    //   console.log(res.data)
-    // })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   fetchSignIn()
-  // }, [])
-
-
 
   return (
     <ThemeProvider theme={theme}>

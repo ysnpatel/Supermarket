@@ -14,7 +14,6 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
-import Review from './Review';
 
 function Copyright() {
   return (
@@ -49,11 +48,6 @@ export default function Checkout() {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
-    // if (activeStep === 1){
-    //   axios.post(url, cart)
-    //   .then(setActiveStep to activestep+1, arrow function)
-    //   .catch(alert error)
-    // }
   };
 
   const handleBack = () => {

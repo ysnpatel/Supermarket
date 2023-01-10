@@ -30,10 +30,6 @@ function ResponsiveAppBar() {
     setIsDrawerOpen,
   } = useContext(CustomContext);
 
-  // useEffect(() => {
-  //   Object.values(cart);
-  // }, [cart]);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };

@@ -1,16 +1,10 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import Container from "@mui/material/Container";
 import CardActionArea from "@mui/material/CardActionArea";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import Bakery from "../../assets/Bakery.png";
 import CookingAndBaking from "../../assets/CookingAndBaking.png";
@@ -29,7 +23,6 @@ import { CustomContext } from "../../context/Context";
 export default function Home() {
 
   const { currentUserInfo, setCurrentUserInfo, filter, setFilter } = useContext(CustomContext);
-  console.log(currentUserInfo);
 
   let arr1 = [
     Bakery,
@@ -55,9 +48,10 @@ export default function Home() {
     "SnacksAndSweets",
     "Pantry",
     "MadeInNZ"
-  ]
+  ];
 
-
+// First we map through arr1 to populate the cards with our saved images. 
+// Then we use arr2 to fill in the path parameter of the NavLink to ensure user ends up on category page with correct category already selected
 
   return (
     <div>
