@@ -56,19 +56,19 @@ const updateEmail = async (req,res)=>{
     res.send(data)
 }
 
-//not done. add bcrypt etc
+//full process not completed. add bcrypt etc
 const updatePassword = async (req,res)=>{
     let data = await DBServices.dbUpdatePassword(req,res)
     res.send(data)
 }
 
-//not done, because address not in database/sign up form
+//full process not completed
 const updateAddress = async (req,res)=>{
     let data = await DBServices.dbUpdateAddress(req,res)
     res.send(data)
 }
 
-//not done
+//full process not completed
 const deleteAccount = async (req,res)=>{
     let data = await DBServices.dbDeleteAccount(req,res)
     res.send(data)

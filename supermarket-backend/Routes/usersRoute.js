@@ -3,7 +3,6 @@ var router = express.Router();
 const multer = require ('multer')
 const upload = multer()
 
-
 var usersController = require('../Controllers/usersController')  
 
 router.get('/getOneUser/:userId',(req,res)=>{

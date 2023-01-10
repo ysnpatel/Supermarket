@@ -15,6 +15,7 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { PriceChange } from '@mui/icons-material';
+import CardMedia from "@mui/material/CardMedia";
 
 
 
@@ -75,7 +76,7 @@ setTotal(total.toFixed(2))
     <Drawer anchor='right' open={isDrawerOpen} onClose= {() => setIsDrawerOpen(false)}>
       <Box p={2} width='400px' textAlign='center' role='presentation'>
         <Typography variant='h6' component='div'>
-          Cart {JSON.stringify(cart)}
+          Your Cart 
         </Typography>
         {/* <Typography variant='h6' component='div'>
           Data: {JSON.stringify(listOfItems)}
@@ -90,11 +91,12 @@ setTotal(total.toFixed(2))
                   flexDirection: "column",
                 }}
               >
-                <CardContent>{item.productName}<br></br>{cart[item.productId]}<br></br>{(item.price*cart[item.productId]).toFixed(2)}</CardContent>
+                <CardMedia component="img" image={item.Image} alt="random" height="150px"/>
+                <CardContent>{item.productName}<br></br>Quantity: {cart[item.productId]}<br></br>{(item.price*cart[item.productId]).toFixed(2)}</CardContent>
               </Card>
           ))}
         </Grid>
-        <Typography>{total}</Typography>
+        <Typography><br></br>Total: {total}</Typography>
       </Container>
         
         <NavLink to="checkout">

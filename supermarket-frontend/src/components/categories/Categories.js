@@ -206,7 +206,7 @@ export default function Album() {
   };
 
   const addProduct = (itemId) => {
-    let currentQuantity = cart[itemId]; //second bit??
+    let currentQuantity = cart[itemId]; 
     if (currentQuantity === undefined) {
       currentQuantity = 1;
     } else {
@@ -222,7 +222,7 @@ export default function Album() {
     if (currentQuantity === undefined) {
       currentQuantity = undefined;
     } else if (currentQuantity <= 0) {
-      currentQuantity = 0; //and delete item from cart
+      currentQuantity = 0; 
     } else {
       currentQuantity--;
     }
@@ -267,16 +267,14 @@ export default function Album() {
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
+
         <Typography
           variant="subtitle1"
           align="center"
           color="text.secondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          Footer Coming Soon!
         </Typography>
         <Copyright />
       </Box>

@@ -76,7 +76,7 @@ let dbUpdatePassword = async (req, res)=>{
 
 
 
-//add address to sign up form, and database table
+//full process not completed.
 let dbUpdateAddress = async (req, res)=>{
 
     return new Promise((resolve, reject) => {
@@ -89,7 +89,7 @@ let dbUpdateAddress = async (req, res)=>{
 };
 
 
-//delete
+//full process not completed.
 let dbDeleteAccount = async (req, res)=>{
 
     let email = req.params.email
